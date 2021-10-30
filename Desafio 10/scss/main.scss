@@ -1,0 +1,29 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image: url(../img/fondo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover ;
+}
+header{
+    color: white;
+}
+
+
+.img-logo{
+    width: 60px;
+    border-radius: 50%;
+}
+
+header div a{ 
+  text-decoration: none;
+}
+
+
+span{
+    color: white;
+    text-transform: uppercase;
+}
