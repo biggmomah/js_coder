@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+
+
+<!-- HEADER -->
+<header class="header">
+    <div class="container-fluid">
+
+        <!-- NAVBAR -->
+        <nav class="row  justify-content-between align-items-center text-uppercase pt-4">
+            <!-- LOGO -->
+            <a href="#" class="col-auto">
+                <img src="img/logotbh.png" alt="" class="img-logo alig">
+            </a>
+        
+
+            <!-- LINKS -->
+            <div class="col-auto">
+                <a href=""class="pr-3">Contacto</a>
+                <a href=""class="pr-3">Productos</a>
+                <a href=""class="pr-3">Carrito</a>
+            </div>
+        </nav>
+
+
+        <!-- DESCRIPCION -->
+        <div class="row">
+            <div 
+                <!-- TITULO -->
+                <h1 class="text-uppercase text-center ">
+                    bienvenido
+                </h1>
+                <!-- DESCRIPCION -->
+                <p class="text-center text-uppercase">La idea del proyecto es armar un sitio web interactivo donde se puedan comprar servicios que ofrece la empresa, finalizandolo en el carrito</p>
+           
+            </div>
+  
+        </div>
+    </div>
+</header>
+
+<div class="container productos">
+
+    <div class="row justify-content-between">
+      
+            <article class="col-sm-4 mb-3 card producto">
+                <img src="img/mentornia.png"class="card-img-top">
+                <h4 class="text-center">Mentorias</h4>
+                <p class="text-center">Consultanos acerca de las mentorias</p>
+                <button class="btn-producto btn btn-outline-primary w-100 agregarMentoria"  data-nombre="mentorias"
+                id="1">Agregar producto</button>
+            </article>
+     
+
+      
+            <article class="col-sm-4 mb-3 card producto">
+                <img src="img/dinero.jpg"class="card-img-top">
+                <h4 class="text-center mt-auto">Gestion de carteras</h4>
+                <p>Gestiona tu capital con nosotros y hace rendir tu plata</p>
+                <button class="btn-producto btn  btn-outline-primary w-100 mt-auto"
+                data-nombre="gestion"
+                id="2">Agregar producto</button>
+            </article>
+      
+            <button class="btn btn-primary"id="revisar">Revisar Carrito</button>
+    </div>
+
+    <section class="container mt-3">
+        <ul class="list-group" id="carrito">
+            
+        </ul>
+    </section>
+
+    <template id="template">
+        <li class="list-group d-flex justify-content-between align-items-center">
+            <span class="lead">Producto</span>
+            <span class="badge bg-primary rounded-pill">1</span>
+        </li>
+    </template>
+
+</div>
+
+
+
+
+<form>
+    <div class="mb-3" id="formulario">
+        <div>
+        <label for="" class="form-label mt-3">Nombre y apellido</label>
+        <input type="text" class="form-control" id="nombreSubmit">
+        </div>
+
+        <div>
+        <label for="" class="form-label mt-3">Email</label>
+        <input type="email" class="form-control" id="emailSubmit">
+        </div>
+
+        <div>
+        <label for="" class="form-label mt-3">Consulta</label>
+        <input type="text" class="form-control" id="consultaSubmit">
+        </div>
+
+         <input class="btn btn-primary mt-3" id="btnSubmit" type="submit" value="Enviar consulta">
+
+    </div>
+
+
+    <div class="col">
+        <h3 class='text-center'>Consultas</h3>
+
+        <!-- document.querySelector('#lista-tareas') -->
+        <div id="listaConsultas">
+        <!-- document.querySelector('#lista-tareas') -->	
+
+        </div >
+
+    </div>
+    
+
+</form>
+   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="js/productos.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
