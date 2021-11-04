@@ -1,0 +1,16 @@
+[
+    {
+        "nombre": "Gestion de carteras",
+        "descripcion": "Mejora el retorno en tus ganancias con nuestros productos",
+        "imagen": "img/dinero.jpg",
+        "precio": "1000",
+        "id": 1
+    },
+    {
+        "nombre": "Mentorias",
+        "descripcion": "No pierdas tiempo con programas largos, nosotros personalizamos la enseñanza",
+        "imagen": "img/mentornia.png",
+        "precio": "1400",
+        "id": 2
+    }
+]
