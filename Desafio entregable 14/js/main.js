@@ -2,7 +2,7 @@
 const listaCarrito= document.querySelector('#productos')
 const enviarConsulta=  document.querySelector('#submit')
 const incorporarTable= document.querySelector('#lista-carrito tbody')
-const listaConsultas= document.querySelector('#listaConsultas')
+
 // const template= document.getElementById("template");
 // const fragment= document.createDocumentFragment();
 
@@ -188,6 +188,7 @@ function actualizarHTML(){
         
         `
     incorporarTable.appendChild(row)
+    console.log('funciona dsadsadas')
 
     
     // =============================================================================
@@ -235,29 +236,7 @@ function eliminarProducto(e) {
 }
 
 // ==============================================================================
-// function enviarFormulario(e){
-//     e.preventDefault();
 
-// //     let nombre = e.target[0].value;
-// //     let email= e.target[1].value
-// //     let consulta= e.target[2].value;
-
-
-// //   const arr=[nombre, email, consulta]
-    
-//     const div= document.createElement('div')
-//     div.classList.add('d-flex')
-//     div.innerHTML= `
-//         <h4>Nombre completo${listaConsultas.value}</h4>
-//         <p>Email:${listaConsultas.value}</p>
-//         <p>Consulta:${listaConsultas.value}</p>
-//     `
-
-//     listaConsultas.innerHTML+=div
-
-    
-//     console.table(div)
-// }
 
 // ==================================================================================
 // EMPIEZA NUEVAMENTE

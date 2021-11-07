@@ -48,11 +48,11 @@ function agregarCarrito(e){
     // MANERA 1
     if (e.target.classList.contains("btn-producto")) {
         console.log('entraste')
-        Swal.fire('Agregaste el producto correctamente!', 'El producto sera agregado al carrito y nos comunicaremos a la brevedad.','success');
-		const productCard = e.target.parentElement;
+       
+		const productCard = e.target.parentElement.parentElement;
 
 		const productoAgregado = {
-			nombre: productCard.querySelector('h4').textContent,
+			nombre: productCard.querySelector('h2').textContent,
 			id: productCard.querySelector('button').dataset.id,
 			cantidad: 1
 		}
@@ -76,6 +76,7 @@ function agregarCarrito(e){
 
         actualizarHTML();
         actualizarStorage();
+        Swal.fire('Agregaste el producto correctamente!', 'El producto sera agregado al carrito y nos comunicaremos a la brevedad.','success');
     }
 
     // =======================================================================
@@ -117,13 +118,14 @@ function mostrarProductos(listadoProductos){
 // =============================================================================
     const html=
         `
-        <article class="col-sm-4 mb-3 card producto">
-                <img src="${producto.imagen}" class="card-img-top">
-                <h4 class="text-center">${producto.nombre}</h4>
+        <div class="col">
+                <img src="${producto.imagen}" class="card-img-top img-fluid producto-img">
+                <h2 class="text-center producto-title">${producto.nombre}</h2>
                 <p class="text-center">${producto.descripcion}</p>
+                <p class="text-center producto-precio"> ${producto.precio}
                 <button class="btn-producto btn btn-outline-primary w-100"  data-nombre="${producto.nombre}"
                 data-id=${producto.id}}>Agregar producto</button>
-            </article>
+        </div>
             
             `
         listaCarrito.innerHTML+=html;
@@ -190,6 +192,7 @@ function actualizarHTML(){
         
         `
     incorporarTable.appendChild(row)
+    console.log('funciona')
 
     
     // =============================================================================

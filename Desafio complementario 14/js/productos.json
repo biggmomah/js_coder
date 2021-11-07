@@ -1,16 +1,26 @@
 [
     {
         "nombre": "Gestion de carteras",
-        "descripcion": "Mejora el retorno en tus ganancias con nuestros productos",
-        "imagen": "img/dinero.jpg",
-        "precio": "1000",
+        "descripcion": "La gestión de carteras es una actividad que consiste en tomar decisiones de inversión y aplicarlas sobre un conjunto de activos seleccionado de forma discrecional y personalizada. ",
+        "imagen": "img/fondo_inversion.jpg",
+        "precio": 2,
         "id": 1
     },
+
     {
         "nombre": "Mentorias",
-        "descripcion": "No pierdas tiempo con programas largos, nosotros personalizamos la enseñanza",
-        "imagen": "img/mentornia.png",
-        "precio": "1400",
+        "descripcion": "No sabes por donde empezar? Quisieras que alguien te enseñe por donde ir y en que podes estar fallando? Nosotros armamos un programa basado en lo que necesites. ",
+        "imagen": "img/aprendizaje.jpg",
+        "precio": 1,
         "id": 2
+    },
+
+    {
+        "nombre": "Cripto 101",
+        "descripcion": "El ABC del mundo cripto. Bitcoin? Ethereum? Blockchain? DeFi? P2E? Todo lo que necesitas en un solo curso.",
+        "imagen": "img/cripto_101.jpg",
+        "precio": 3,
+        "id": 3
     }
 ]
+
