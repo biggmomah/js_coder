@@ -12,6 +12,9 @@ body {
 header {
   color: white; }
 
+ul {
+  list-style: none; }
+
 .img-logo {
   width: 60px;
   border-radius: 50%; }
@@ -50,3 +53,24 @@ h2 {
 
 .background {
   background: rgba(0, 0, 0, 0.5); }
+
+.cartImg {
+  width: 35px;
+  cursor: pointer;
+  background-color: black; }
+
+.submenu {
+  position: relative; }
+
+.submenu #carrito {
+  display: none;
+  border-radius: 25px; }
+
+.submenu:hover #carrito {
+  display: block;
+  position: absolute;
+  top: 100%;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  min-width: 100%; }

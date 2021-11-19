@@ -1,14 +1,10 @@
 
-
 const listaCarrito= document.querySelector('#productos')
-const enviarConsulta=  document.querySelector('#submit')
+const vaciarCarrito= document.querySelector('#vaciar-carrito')
+const finalizarCarrito= document.querySelector('#finalizar-compra')
 const incorporarTable= document.querySelector('#lista-carrito tbody')
-const listaConsultas= document.querySelector('#listaConsultas')
-// const template= document.getElementById("template");
-// const fragment= document.createDocumentFragment();
 
-
-
+let carritoArray=[];
 
 document.addEventListener('DOMContentLoaded', () => {
 	const carritoStorage = JSON.parse(localStorage.getItem('carritoArray'));
@@ -32,28 +28,25 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-
-
-// listaCarrito.addEventListener('click', agregarCarrito);
-// enviarConsulta.addEventListener('submit', enviarFormulario)
 incorporarTable.addEventListener('click', eliminarProducto)
-
-$('#productos').on('click', agregarCarrito)
-
+listaCarrito.addEventListener('click', agregarCarrito)
+vaciarCarrito.addEventListener('click', eliminarTodo)
+finalizarCarrito.addEventListener('click', finalizarCompra)
 
 
 function agregarCarrito(e){
     // =====================================================================
-
+    e.preventDefault();
     // MANERA 1
+
     if (e.target.classList.contains("btn-producto")) {
-        console.log('entraste')
-       
-		const productCard = e.target.parentElement.parentElement;
+        
+		const productCard = e.target.parentElement;
 
 		const productoAgregado = {
 			nombre: productCard.querySelector('h2').textContent,
 			id: productCard.querySelector('button').dataset.id,
+            precio: productCard.querySelector('.producto-precio').textContent,
 			cantidad: 1
 		}
 
@@ -81,35 +74,65 @@ function agregarCarrito(e){
 
     // =======================================================================
 
-/* 
-    // MANERA 2
-    console.log(e.target.dataset.nombre)
 
-    const producto= {
-        titulo: e.target.dataset.nombre,
-        id: e.target.dataset.nombre,
-        cantidad: 1
-    }
+    // // MANERA 2
+    // const producto= {
+    //     titulo: e.target.dataset.nombre,
+    //     id: e.target.dataset.id,
+    //     precio: e.target.dataset.precio,
+    //     cantidad: 1
+    // }
+   
+    // // buscamos el indice
+    // const exist = carritoArray.some((item) => item.id === producto.id);
 
-    // buscamos el indice
-    const index = carritoArray.findIndex((item) => item.id === producto.id);
+    // if (e.target.classList.contains("btn-producto")){
 
-    // si no existe empujamos el nuevo elemento
-    if (index === -1) {
-        carritoArray.push(producto);
-        $(e.target).parent().slideUp("slow").slideDown('3000');
-        $(e.target).append(`<p id='alerta'>Agregaste correctamente el producto </p>`)
-        $('#alerta').css('color', 'red')
 
-    } else {
-        // en caso contrario aumentamos su cantidad
-        carritoArray[index].cantidad++;
-       
-    }
-    // contadorCarrito() */
+    //     if (exist) {
+    //         //creo carrito temporal con map, para cargar los productos repetidos
+    //         const carritoTemp = carritoArray.map((item) => {
+    //             if (item.id == producto.id) {
+    //                 // actualiza la cantidad del producto que se repite
+    //                 item.cantidad++;
+    //             }
+    //             // guarda en el nuevo array los productos que trae el carrito original
+    //             return item;
+    //         });
+    //         // actualizo el carrito original usando el spread operator. Le asigno los VALORES del array temporal
+    //         carritoArray = [...carritoTemp];
+    //         console.log("cantidad actualizada");
+            
+    //     } else {
+    //         console.log(
+    //             "primera instancia del producto, cantidad: ",
+    //             producto.cantidad
+    //         );
+    //         carritoArray.push(producto);
+    //     }
+    //     actualizarHTML();
+    //     actualizarStorage();
+    //     Swal.fire('Agregaste el producto correctamente!', 'El producto sera agregado al carrito y nos comunicaremos a la brevedad.','success');
+        
+    // }
+    
+// ================================================================
+// MANERA 3
+
+    // if (e.target.classList.contains("btn-producto")){
+    //     // si no existe empujamos el nuevo elemento
+    //     if (index === -1) {
+    //         carritoArray.push(producto);
+    //     } else {
+    //         // en caso contrario aumentamos su cantidad
+    //         carritoArray[index].cantidad++;
+    //     }
+    //         actualizarHTML();
+    //         actualizarStorage();
+    //         Swal.fire('Agregaste el producto correctamente!', 'El producto sera agregado al carrito y nos comunicaremos a la brevedad.','success');
+    //     // contadorCarrito()
+    //     }
 }
-
-
 
 function mostrarProductos(listadoProductos){
     listaCarrito.innerHTML='';
@@ -118,19 +141,17 @@ function mostrarProductos(listadoProductos){
 // =============================================================================
     const html=
         `
-        <div class="col">
+        <div class="col" id="productos">
                 <img src="${producto.imagen}" class="card-img-top img-fluid producto-img">
                 <h2 class="text-center producto-title">${producto.nombre}</h2>
                 <p class="text-center mt-auto">${producto.descripcion}</p>
-                <p class="text-center mt-auto producto-precio"> ${producto.precio}
-                <button class="btn-producto btn btn-outline-primary w-100"  data-nombre="${producto.nombre}"
-                data-id=${producto.id}}>Agregar producto</button>
+                <p class="text-center mt-auto producto-precio"> ${producto.precio}</p>
+                <button class="btn-producto btn btn-outline-primary w-100" data-nombre="${producto.nombre}"
+                data-id="${producto.id}"}>Agregar producto</button>
         </div>
             
             `
         listaCarrito.innerHTML+=html;
-
-
 // =======================================================================
        /*  $('#productos').append(`
         <article class="col-sm-4 mb-3 card producto">
@@ -145,33 +166,12 @@ function mostrarProductos(listadoProductos){
 }
     )}
 
-/* const contadorCarrito=()=>{
-    
-    // let hijos = $(e.target).parent().children();
-    
-    carrito.textContent=""
-
-        carritoArray.forEach((item)=>{
-        const clone = template.content.firstElementChild.cloneNode(true);
-        clone.querySelector('.lead').textContent=item.titulo;
-        
-
-        clone.querySelector('.badge').textContent=item.cantidad
-
-        fragment.appendChild(clone);
-
-    }) 
-
-    carrito.appendChild(fragment)
-} */
-
 function actualizarHTML(){
     incorporarTable.innerHTML='';
 
     carritoArray.forEach(producto=>{
-        // const { nombre, precio, cantidad, id } = producto;
-
-        const row= document.createElement('tr');
+    const{nombre, precio, cantidad, id} = producto;
+      /*   const row= document.createElement('tr');
         row.innerHTML=`
         <td>
             ${producto.nombre}
@@ -190,33 +190,34 @@ function actualizarHTML(){
 
          </td>
         
-        `
-    incorporarTable.appendChild(row)
-    console.log('funciona')
+         incorporarTable.appendChild(row)
+        ` */
+  
 
     
     // =============================================================================
-  /*   $('#lista-carrito tbody')
+    $('#lista-carrito tbody')
     .append(`
         <tr>
             <td>
-                ${producto.nombre}
+                ${nombre}
             </td>
 
             <td>
-                ${producto.precio}
+                ${precio}
             </td>
 
             <td class= "text-center">
-                ${producto.cantidad}
+                ${cantidad}
             </td>
 
             <td>
-            <a href="#" class="borrar-producto" data-id="${producto.id}"><i class="fas fa-trash"></i></a>
-
+            <a href="#" class="borrar-producto" data-id="${id}"><i class="fas fa-trash"></i></a>
             </td>
         </tr>`)
- */
+
+        console.log(producto)
+
         
     })
 }
@@ -224,7 +225,6 @@ function actualizarHTML(){
 function actualizarStorage(){
     localStorage.setItem('carritoArray', JSON.stringify(carritoArray))
 }
-
 
 function eliminarProducto(e) {
 	e.preventDefault();
@@ -239,192 +239,50 @@ function eliminarProducto(e) {
 	}
 }
 
-// ==============================================================================
-// function enviarFormulario(e){
-//     e.preventDefault();
+function eliminarTodo(e){
+    e.preventDefault();
+    carritoArray=[]
+    actualizarHTML()
+    actualizarStorage()
+}
 
-// //     let nombre = e.target[0].value;
-// //     let email= e.target[1].value
-// //     let consulta= e.target[2].value;
+function finalizarCompra(e){
+    e.preventDefault();
 
+   console.log(carritoArray)
 
-// //   const arr=[nombre, email, consulta]
-    
-//     const div= document.createElement('div')
-//     div.classList.add('d-flex')
-//     div.innerHTML= `
-//         <h4>Nombre completo${listaConsultas.value}</h4>
-//         <p>Email:${listaConsultas.value}</p>
-//         <p>Consulta:${listaConsultas.value}</p>
-//     `
+   const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-primary',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })
+  
+  swalWithBootstrapButtons.fire({
+    title: 'Estas seguro que deseas finalizar la compra?',
+    icon: 'warning',
+    showCancelButton: true,
+    cancelButtonText: 'No, mejor quiero pensarlo!',
+    confirmButtonText: 'Si, por favor!',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+        eliminarTodo(e);
+      swalWithBootstrapButtons.fire(
+        'Su compra sera procesada!'
+      )
+    } else if (
+      /* Read more about handling dismissals below */
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'La compra no se ha procesado',
+        'Volvera a la página.',
+        'error'
+      )
+    }
+  })
+}
 
-//     listaConsultas.innerHTML+=div
-
-    
-//     console.table(div)
-// }
-
-// ==================================================================================
-// EMPIEZA NUEVAMENTE
-
-
-// botones.forEach((btn)=>{
-//    btn.addEventListener('click',agregarAlCarrito)
-// })
-
-// VARIABLES 
-
-// const user =JSON.parse(localStorage.getItem('usuarios')) || []
-
-// const nombreSubmit= document.querySelector("#nombreSubmit");
-// const emailSubmit= document.querySelector('#emailSubmit')
-// const consultaSubmit= document.querySelector("#consultaSubmit");
-// const btn= document.querySelector('#btnSubmit')
-// const listaConsultas=document.querySelector('#listaConsultas')
-// let consulta;
-// // let menu = opciones();
-// let contador=0;
-
-// document.addEventListener('DOMContentLoaded', ()=>{
-//     const consultaStorage= JSON.parse(localStorage.getItem('consulta'))
-
-//     consulta= consultaStorage || [];
-
-//     agregarConsulta();
-// })
-
-
-
-// function agregarConsulta(e){
-//     e.preventDefault();
-//     // Como podria hacer para que si pongo algo en blanco tire error?
-
-//     const div=document.createElement('div');
-//     div.innerHTML= `Nombre: ${nombreSubmit.value}
-//                     email: ${emailSubmit.value}
-//                     consulta: ${consultaSubmit.value}
-    
-//     `
-
-//     listaConsultas.appendChild(div)
-
-
-
-// }
-
-// function Consultas(){
-//     listaConsultas.innerHTML=''
-// }
-
-// btn.addEventListener('click',agregarConsulta)
-
-
-//  CLASES Y OBJETOS
-
-
-// class User{
-//     constructor(userNombre, userConsulta, userEmail){
-//     this.nombre=userNombre;
-//     this.consulta=userConsulta;
-//     this.email=userEmail;
-//     }
-// }
-
-// class Servicios{
-//     constructor(servicio, precio){
-//         this.servicio= servicio;
-//         this.precio=precio;
-//     }
-// }
-
-// const servicio=["Clase 1 a 1", 100]
-
-
-// while (menu != 3){
-
-// if ( menu == 1 ){
-//     datos(user)  
-//     menu=opciones()
-// }else if(menu==2){
-//     for (let i = 0; i < servicio.length; i++) {
-//        alert(`estas adquiriendo ${servicio}`) 
-//     }
-//     contador++;
-//     menu=opciones()
-// }
-
-// }alert("Gracias por visitarnos.")
-
-
-
-// for(const registro of user){
-//     let div= document.createElement('div');
-//     div.innerHTML=`<h2> ${registro.nombre}
-//     <p> ${registro.consulta} / ${registro.email}
-//     <hr>`;
-//     document.body.appendChild(div)
-// }
-// const nombreSubmit= document.querySelector("#nombreSubmit");
-// const emailSubmit= document.querySelector('#emailSubmit')
-// const consultaSubmit= document.querySelector("#consultaSubmit");
-// const btn= document.querySelector('#btnSubmit')
-// const listaConsultas=document.querySelector('#listaConsultas')
-// const botonProducto= document.querySelector("#botonProducto")
-// const carrito= document.querySelector('#carrito')
-
-// document.addEventListener('DOMContentLoaded', ()=>{
-//     mostrarProductos(productos)
-// })
-
-
-
-// document.addEventListener('DOMContentLoaded', ()=>{
-//     const consultaStorage= JSON.parse(localStorage.getItem('consulta'))
-
-//     consulta= consultaStorage || [];
-
-//     agregarConsulta();
-// })
-
-
-// function mostrarProductos(productos){
-//     productos.forEach(producto => {
-//         const html=`
-//         <div class="container">
-//             <div class="row">
-//                 <div class="col-4">
-//                     <div class="card">
-//                         <img src="${producto.imagen}" class="card-img-top img-thumbnail">
-//                         <h4 class="text-center">${producto.nombre}</h4>
-//                         <p>Estas interesado en conocer más sobre la blockchain?</p>
-//                         <button class="btn btn-primary w-100" id="botonProducto" >Conocenos!</button>
-//                     </div>
-//                 </div>
-            
-//             </div>
-//         </div>
-//         `
-//     listaConsultas.innerHTML+=html
-//     });
-// }
-
-// // function agregarProductos(e){
-// //     e.preventDefault();   
-// //     console.log(e.target)
-// // }
-
-// function agregarConsulta(e){
-//     e.preventDefault();
-//     // Como podria hacer para que si pongo algo en blanco tire error?
-
-//     const div=document.createElement('div');
-//     div.innerHTML= `Nombre: ${nombreSubmit.value}
-//                     email: ${emailSubmit.value}
-//                     consulta: ${consultaSubmit.value}
-    
-//     `
-
-//     carrito.appendChild(div)
-
-// }
 

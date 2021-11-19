@@ -47,7 +47,7 @@ function agregarCarrito(e){
 
     // MANERA 1
     if (e.target.classList.contains("btn-producto")) {
-       
+        console.log('entraste')
        
 		const productCard = e.target.parentElement.parentElement;
 
@@ -121,8 +121,8 @@ function mostrarProductos(listadoProductos){
         <div class="col">
                 <img src="${producto.imagen}" class="card-img-top img-fluid producto-img">
                 <h2 class="text-center producto-title">${producto.nombre}</h2>
-                <p class="text-center">${producto.descripcion}</p>
-                <p class="text-center producto-precio"> ${producto.precio}
+                <p class="text-center mt-auto">${producto.descripcion}</p>
+                <p class="text-center mt-auto producto-precio"> ${producto.precio}</p>
                 <button class="btn-producto btn btn-outline-primary w-100"  data-nombre="${producto.nombre}"
                 data-id=${producto.id}}>Agregar producto</button>
         </div>
@@ -169,6 +169,7 @@ function actualizarHTML(){
     incorporarTable.innerHTML='';
 
     carritoArray.forEach(producto=>{
+        // const { nombre, precio, cantidad, id } = producto;
 
         const row= document.createElement('tr');
         row.innerHTML=`
@@ -191,7 +192,7 @@ function actualizarHTML(){
         
         `
     incorporarTable.appendChild(row)
-
+    console.log('funciona')
 
     
     // =============================================================================
